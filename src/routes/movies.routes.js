@@ -15,5 +15,19 @@ moviesRoutes.post(
 );
 moviesRoutes.get("/lay-danh-sach-phim", moviesController.getAllFilms);
 moviesRoutes.get("/lay-danh-sach-banners", moviesController.getBanners);
-
+moviesRoutes.get("/lay-thong-tin-phim/:maPhim", moviesController.getDetailFilm);
+moviesRoutes.get("/lay-danh-sach-phim-phan-trang", moviesController.getFilmsPagination);
+moviesRoutes.put(
+  "/cap-nhat-phim",
+  upload.single("hinhAnh"),
+  authenticate,
+  authorize("QuanTri"),
+  moviesController.updateFilm
+);
+moviesRoutes.delete(
+  "/xoa-phim/:maPhim",
+  authenticate,
+  authorize("QuanTri"),
+  moviesController.deleteFilm
+);
 module.exports = moviesRoutes;

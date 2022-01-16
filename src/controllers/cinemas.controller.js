@@ -41,7 +41,9 @@ const uploadLogo = async (req, res) => {
   }
   s3.putObject(params, async (err, data) => {
     if (err) {
-      console.log(err);
+      return res
+        .status(400)
+        .json(400, { message: "Lỗi server, không thể upload" });
     } else {
       const url = `${config.S3_DOMAIN_NAME}/${dst}`;
       if (flag) {
@@ -76,4 +78,5 @@ const getDetailCineplex = async (req, res) => {
     throw error;
   }
 };
+
 module.exports = { getCineplexes, getDetailCineplex, uploadLogo };
